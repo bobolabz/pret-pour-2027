@@ -132,7 +132,7 @@
 
 <script>
 (function () {
-  var CHECKOUT_URL = "%%CHECKOUT_URL%%";
+  var CHECKOUT_URL = "https://buy.stripe.com/5kQ4gs1eQfVk7ME6jY7bW00";
   var buy = document.getElementById("buybtn"), fine = document.getElementById("buyfine");
   if (CHECKOUT_URL.indexOf("http") === 0) { buy.href = CHECKOUT_URL; buy.target = "_blank"; buy.rel = "noopener"; }
   else { buy.textContent = "Mise en vente très prochainement"; fine.textContent = "Le kit est finalisé. Le paiement en ligne ouvre dans quelques jours."; }
