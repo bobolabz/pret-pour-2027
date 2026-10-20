@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnostic facture électronique : suis-je concerné ?</title><meta name="description" content="Test gratuit en 4 questions : réception, émission, e-reporting. Découvrez vos obligations de facture électronique et leurs dates, selon votre taille, votre TVA et vos clients.">
+<link rel="canonical" href="https://bobolabz.github.io/pret-pour-2027/diagnostic.html"><meta property="og:title" content="Diagnostic facture électronique : suis-je concerné ?"><meta property="og:description" content="Test gratuit en 4 questions : réception, émission, e-reporting. Découvrez vos obligations de facture électronique et leurs dates, selon votre taille, votre TVA et vos clients."><meta property="og:type" content="website"><meta property="og:locale" content="fr_FR"><meta property="og:url" content="https://bobolabz.github.io/pret-pour-2027/diagnostic.html">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@500;700&family=Public+Sans:wght@400;600&display=swap"><link rel="stylesheet" href="style.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Diagnostic facture électronique", "applicationCategory": "BusinessApplication", "operatingSystem": "Tous navigateurs", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "inLanguage": "fr-FR", "publisher": {"@type": "Organization", "name": "BoboLabz", "url": "https://bobolabz.github.io/pret-pour-2027/"}}</script></head><body><header class="top"><div class="wrap"><a class="brand" href="index.html">Prêt pour <span>2027</span></a>
+<nav><a href="diagnostic.html">Diagnostic</a><a href="index.html#kit">Le kit</a><a href="articles/index.html">Guides</a></nav></div></header><section class="band"><div class="wrap">
+<p class="eyebrow">Diagnostic gratuit · sans inscription</p>
+<h1 style="font-size:clamp(1.8rem,4.5vw,2.8rem)">Facture électronique : suis-je concerné, et pour quoi&nbsp;?</h1>
+<p class="read" style="color:var(--muted)">Quatre questions, un résultat immédiat. Rien n'est enregistré : tout se calcule dans votre navigateur.</p>
+<div class="diag">
+      <form id="dform" onsubmit="return false">
+        <fieldset><legend>Taille de votre entreprise</legend><div class="opts">
+          <label><input type="radio" name="size" id="size-small" value="small" checked> Micro, TPE ou PME</label>
+          <label><input type="radio" name="size" id="size-big" value="big"> ETI ou grande entreprise</label>
+        </div></fieldset>
+        <fieldset><legend>Votre régime de TVA</legend><div class="opts">
+          <label><input type="radio" name="vat" id="vat-franchise" value="franchise" checked> Franchise en base</label>
+          <label><input type="radio" name="vat" id="vat-reel" value="reel"> Je facture la TVA</label>
+          <label><input type="radio" name="vat" id="vat-exo" value="exo"> Activité exonérée (soins…)</label>
+        </div></fieldset>
+        <fieldset><legend>Vos clients <small style="font-weight:400;color:var(--muted)">(plusieurs choix)</small></legend><div class="opts">
+          <label><input type="checkbox" name="cli" id="cli-b2b" value="b2b" checked> Entreprises en France</label>
+          <label><input type="checkbox" name="cli" id="cli-b2c" value="b2c"> Particuliers</label>
+          <label><input type="checkbox" name="cli" id="cli-intl" value="intl"> Clients à l'étranger</label>
+          <label><input type="checkbox" name="cli" id="cli-pub" value="pub"> Secteur public</label>
+        </div></fieldset>
+        <fieldset><legend>Vous vendez</legend><div class="opts">
+          <label><input type="radio" name="nat" id="nat-services" value="services" checked> Des services</label>
+          <label><input type="radio" name="nat" id="nat-biens" value="biens"> Des biens</label>
+          <label><input type="radio" name="nat" id="nat-mixte" value="mixte"> Les deux</label>
+        </div></fieldset>
+      </form>
+      <div class="result" aria-live="polite">
+        <h3>Vos obligations</h3>
+        <ul class="ob" id="obs"></ul>
+        <p style="font-size:.88rem;color:var(--muted);margin-top:1rem">Information générale, pas un conseil juridique. Cas particuliers (marketplaces, activités mixtes) : voir le guide.</p>
+        <a class="btn btn-primary" id="kitlink" href="index.html#kit" style="margin-top:.4rem">Mon plan d'action complet</a>
+      </div>
+</div>
+<script>
+(function () {
+  var form = document.getElementById("dform"), out = document.getElementById("obs");
+  function val(n) { var e = form.querySelector('input[name="' + n + '"]:checked'); return e ? e.value : ""; }
+  function item(state, title, note) {
+    var label = { done: "DÉJÀ OBLIGATOIRE", due: "", no: "NON CONCERNÉ" }[state];
+    return '<li><span class="pill ' + state + '">' + (state === "due" ? due : label) + "</span><strong>" + title + "</strong><small>" + note + "</small></li>";
+  }
+  var due = "";
+  function render() {
+    var size = val("size"), vat = val("vat"), nat = val("nat");
+    var cli = Array.prototype.map.call(form.querySelectorAll('input[name="cli"]:checked'), function (e) { return e.value; });
+    var has = function (c) { return cli.indexOf(c) > -1; };
+    var big = size === "big", exo = vat === "exo";
+    due = big ? "DÉJÀ OBLIGATOIRE" : "AU 01/09/2027";
+    var st = big ? "done" : "due", h = "";
+    h += item("done", "Recevoir vos factures fournisseurs via une plateforme agréée", "Depuis le 1er septembre 2026, pour toutes les entreprises, même exonérées ou en franchise.");
+    if (exo) {
+      h += item("no", "Émettre des factures électroniques et faire l'e-reporting", "Vos opérations exonérées (art. 261 à 261 E du CGI) sortent du dispositif. Toute activité annexe taxable y revient.");
+    } else {
+      h += has("b2b") ? item(st, "Émettre vos factures B2B au format électronique", "Format structuré, via votre plateforme, avec le SIREN du client et la nature de l'opération.")
+                      : item("no", "Émission de factures électroniques", "Vous n'avez pas de client professionnel établi en France.");
+      h += (has("b2c") || has("intl")) ? item(st, "E-reporting de vos données de transaction", "Pour vos ventes " + [has("b2c") ? "aux particuliers" : "", has("intl") ? "aux clients étrangers" : ""].filter(Boolean).join(" et ") + ", transmis par votre plateforme" + (vat === "franchise" ? " au rythme le plus espacé (franchise)." : "."))
+                                       : item("no", "E-reporting de transaction", "Toutes vos ventes passent déjà par la facture électronique.");
+      var anyPriv = has("b2b") || has("b2c") || has("intl");
+      h += (nat !== "biens" && anyPriv) ? item(st, "Transmettre vos données d'encaissement", "Vous vendez des services : la date et le montant de chaque paiement sont transmis (statut « encaissée » pour le B2B).")
+                                       : item("no", "Données de paiement", nat === "biens" ? "Elles ne concernent que les prestations de services." : "Aucune vente concernée.");
+    }
+    if (has("pub")) h += item("no", "Factures au secteur public", "Rien de nouveau : vous continuez sur Chorus Pro.");
+    out.innerHTML = h;
+  }
+  form.addEventListener("change", render); render();
+})();
+</script>
+
+<p class="embed-credit" hidden>Diagnostic fourni par <a href="https://bobolabz.github.io/pret-pour-2027/" target="_blank" rel="noopener">Prêt pour 2027</a></p>
+</div></section>
+<script>
+(function () {
+  if (/[?&]embed=1/.test(location.search)) {
+    document.documentElement.classList.add("embed");
+    document.querySelector(".embed-credit").hidden = false;
+    var k = document.getElementById("kitlink"); k.href = "https://bobolabz.github.io/pret-pour-2027/#kit"; k.target = "_blank"; k.rel = "noopener";
+  }
+})();
+</script>
+<style>.embed .top, .embed footer, .embed h1 + p { display: none; } .embed section.band { padding-block: .5rem; } .embed-credit { font-size: .85rem; color: var(--muted); margin-top: .8rem; }</style><footer><div class="wrap"><span>Prêt pour 2027 · une publication BoboLabz</span>
+<span><a href="integrer-le-diagnostic.html">Intégrer le diagnostic sur votre site</a> · <a href="mentions-legales.html">Mentions légales et CGV</a></span>
+<span>Information générale, pas un conseil juridique. À jour au 20/10/2026.</span></div></footer></body></html>
