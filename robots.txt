@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bobolabz.github.io/pret-pour-2027/sitemap.xml
