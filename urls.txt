@@ -9,6 +9,7 @@ https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-freelanc
 https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-vente-particuliers.html
 https://bobolabz.github.io/pret-pour-2027/articles/choisir-plateforme-agreee.html
 https://bobolabz.github.io/pret-pour-2027/articles/fournisseur-envoie-facture-pdf.html
+https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-formateur.html
 https://bobolabz.github.io/pret-pour-2027/articles/index.html
 https://bobolabz.github.io/pret-pour-2027/diagnostic.html
 https://bobolabz.github.io/pret-pour-2027/integrer-le-diagnostic.html
