@@ -13,6 +13,7 @@ https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-formateu
 https://bobolabz.github.io/pret-pour-2027/articles/sanctions-facture-electronique.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-acompte-avoir.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-client-etranger.html
+https://bobolabz.github.io/pret-pour-2027/articles/facture-association.html
 https://bobolabz.github.io/pret-pour-2027/articles/index.html
 https://bobolabz.github.io/pret-pour-2027/diagnostic.html
 https://bobolabz.github.io/pret-pour-2027/integrer-le-diagnostic.html
