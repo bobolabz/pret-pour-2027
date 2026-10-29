@@ -36,6 +36,11 @@ h3 { font-size: 1.2rem; font-weight: 650; margin: 1.5rem 0 .4rem; }
 .eyebrow { font: 600 .78rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ochre-ink); margin: 0 0 1rem; }
 .lead { font-size: 1.2rem; color: var(--muted); max-width: 38rem; }
 
+/* skip link (28/10/2026): hidden until focused with the keyboard, then shown at the top left */
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 10; background: var(--teal); color: var(--paper); padding: .6rem 1rem; border-radius: 0 0 8px 8px; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 0; }
+main:focus { outline: none; }
+
 /* header */
 .top { border-bottom: 1px solid var(--line); background: var(--paper); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .9rem; flex-wrap: wrap; }
@@ -89,7 +94,7 @@ legend { font-weight: 650; margin-bottom: .5rem; }
 .pill { display: inline-block; font: 600 .75rem/1 var(--mono); padding: .3rem .45rem; border-radius: 4px; margin-bottom: .35rem; letter-spacing: .04em; }
 .pill.due { background: var(--ochre-soft); color: var(--ochre-ink); }
 .pill.done { background: var(--ok-soft); color: var(--ok); }
-.pill.no { background: var(--line); color: var(--muted); }
+.pill.no { background: var(--surface); color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); } /* 28/10: muted on --line was 4.49:1, below AA; on surface 6.1:1 */
 
 /* offer */
 .offer { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
@@ -98,11 +103,14 @@ legend { font-weight: 650; margin-bottom: .5rem; }
 .contents .fmt { font: 600 .78rem/1.6 var(--mono); color: var(--ochre-ink); text-transform: uppercase; letter-spacing: .06em; }
 .buy { background: var(--teal); color: var(--paper); border-radius: 10px; padding: 1.8rem; position: sticky; top: 1rem; }
 .buy .price { font: 700 3.2rem/1 var(--display); }
-.buy .price small { font-size: 1rem; font-weight: 500; opacity: .8; }
+/* softened text on the teal box: an explicit mixed colour rather than opacity (same look, 6.3:1 in both themes,
+   and contrast checkers can compute it); browsers without color-mix() fall back to the full --paper colour */
+.buy .eyebrow, .buy .price small, .buy .fine { color: var(--paper); color: color-mix(in srgb, var(--paper) 80%, var(--teal)); }
+.buy .price small { font-size: 1rem; font-weight: 500; }
 .buy ul { padding-left: 1.1rem; margin: 1rem 0 1.4rem; font-size: .95rem; }
 .buy .btn { background: var(--ochre); border-color: var(--ochre); color: #1b1406; width: 100%; text-align: center; }
 .buy a:focus-visible { outline-color: var(--paper); }
-.buy .fine { font-size: .82rem; opacity: .8; margin: .9rem 0 0; }
+.buy .fine { font-size: .82rem; margin: .9rem 0 0; }
 
 /* faq + articles */
 details { border-bottom: 1px solid var(--line); padding: .9rem 0; }

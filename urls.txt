@@ -16,6 +16,7 @@ https://bobolabz.github.io/pret-pour-2027/articles/facture-client-etranger.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-association.html
 https://bobolabz.github.io/pret-pour-2027/articles/factur-x-ubl-cii.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-lmnp.html
+https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-commerce.html
 https://bobolabz.github.io/pret-pour-2027/articles/index.html
 https://bobolabz.github.io/pret-pour-2027/diagnostic.html
 https://bobolabz.github.io/pret-pour-2027/integrer-le-diagnostic.html
