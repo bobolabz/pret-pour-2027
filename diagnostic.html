@@ -35,6 +35,8 @@
         <ul class="ob" id="obs"></ul>
         <p style="font-size:.88rem;color:var(--muted);margin-top:1rem">Information générale, pas un conseil juridique. Cas particuliers (marketplaces, activités mixtes) : voir le guide.</p>
         <a class="btn btn-primary" id="kitlink" href="./#kit" style="margin-top:.4rem">Mon plan d'action complet</a>
+        <h3 style="font-size:1rem;margin-top:1.4rem">Les guides gratuits pour votre cas</h3>
+        <ul id="guides" style="margin:.3rem 0 0;padding-left:1.2rem"></ul>
       </div>
 </div>
 <script>
@@ -67,6 +69,22 @@
     }
     if (has("pub")) h += item("no", "Factures au secteur public", "Rien de nouveau\u00a0: vous continuez sur Chorus Pro.");
     out.innerHTML = h;
+    // Guides matching the answers (31/10/2026, maillage interne): before, the diagnostic linked no article.
+    // Embedded (?embed=1): absolute links opened in a new tab, so the host site's page stays open.
+    var emb = /[?&]embed=1/.test(location.search), base = emb ? "https://bobolabz.github.io/pret-pour-2027/" : "";
+    var g = [];
+    if (vat === "franchise") g.push(["micro-entrepreneur-franchise-tva", "Franchise de TVA et facture électronique"]);
+    if (exo) g.push(["facture-electronique-formateur", "Activités exonérées\u00a0: l'exemple des formateurs"]);
+    if (!exo && has("intl")) g.push(["facture-client-etranger", "Clients et fournisseurs à l'étranger"]);
+    if (!exo && has("b2c")) g.push(nat === "services" ? ["facture-electronique-vente-particuliers", "Vente aux particuliers et e-commerce"]
+                                                      : ["facture-electronique-commerce", "Commerçants avec caisse"]);
+    if (!exo && (has("b2c") || has("intl") || nat !== "biens")) g.push(["e-reporting-micro-entrepreneur", "L'e-reporting expliqué simplement"]);
+    if (!exo && has("b2b")) g.push(["facture-pdf-email-2027", "La facture PDF par e-mail, c'est fini\u00a0?"]);
+    g.push(["reception-factures-electroniques-septembre-2026", "Réception obligatoire depuis septembre 2026"]);
+    g.push(["choisir-plateforme-agreee", "Choisir sa plateforme agréée"]);
+    document.getElementById("guides").innerHTML = g.slice(0, 4).map(function (x) {
+      return '<li><a href="' + base + 'articles/' + x[0] + '.html"' + (emb ? ' target="_blank" rel="noopener"' : "") + ">" + x[1] + "</a></li>";
+    }).join("") + '<li><a href="' + base + 'articles/index.html"' + (emb ? ' target="_blank" rel="noopener"' : "") + ">Tous les guides</a></li>";
   }
   form.addEventListener("change", render); render();
 })();
@@ -85,4 +103,4 @@
 </script>
 <style>.embed .top, .embed .skip, .embed footer, .embed h1 + p { display: none; } .embed section.band { padding-block: .5rem; } .embed-credit { font-size: .85rem; color: var(--muted); margin-top: .8rem; }</style></main><footer><div class="wrap"><span>Prêt pour 2027 · une publication BoboLabz</span>
 <span><a href="integrer-le-diagnostic.html">Intégrer le diagnostic sur votre site</a> · <a href="mentions-legales.html">Mentions légales et CGV</a></span>
-<span>Information générale, pas un conseil juridique. À jour au 31/10/2026.</span></div></footer></body></html>
+<span>Information générale, pas un conseil juridique. À jour au 01/11/2026.</span></div></footer></body></html>
