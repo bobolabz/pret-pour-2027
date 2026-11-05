@@ -156,6 +156,14 @@ th { font-family: var(--display); }
 .preview-note { font-size: .88rem; color: var(--muted); max-width: 42rem; margin-top: 1rem; }
 
 
+/* end-of-article box (05/11/2026): diagnostic first (button + what it gives), then the kit with its price and contents */
+.endbox { background: var(--surface); border: 2px solid var(--teal); border-radius: 10px; padding: clamp(1.1rem, 3vw, 1.8rem); max-width: 46rem; margin: 2.5rem 0 1rem; }
+.endbox h2 { margin: 0 0 .6rem; font-size: clamp(1.3rem, 2.6vw, 1.6rem); }
+.endbox .eyebrow { margin-bottom: .7rem; }
+.endbox p { margin: .5rem 0; }
+.endbox-kit { border-top: 1px solid var(--line); margin-top: 1.3rem; padding-top: 1rem; font-size: .97rem; }
+.endbox-links { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; }
+
 footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
 footer .wrap { padding-block: 2rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
