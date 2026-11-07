@@ -72,8 +72,13 @@
       <div class="result" aria-live="polite">
         <h3>Vos obligations</h3>
         <ul class="ob" id="obs"></ul>
-        <p style="font-size:.88rem;color:var(--muted);margin-top:1rem">Information générale, pas un conseil juridique. Cas particuliers (marketplaces, activités mixtes) : voir le guide.</p>
-        <a class="btn btn-primary" href="#kit" style="margin-top:.4rem">Mon plan d'action complet</a>
+        <p style="font-size:.88rem;color:var(--muted);margin-top:1rem">Information générale, pas un conseil juridique. Cas particuliers (marketplaces, activités mixtes) : voir le guide. Dates du calendrier légal : aucun report n'a été adopté à ce jour (7/11/2026) ; le Gouvernement a confirmé ce calendrier le 27/10/2026 (réponse à la question écrite n° 18851).</p>
+        <div class="diag-kit" id="diagkit" style="margin-top:1.1rem;padding:1rem 1.1rem;border:2px solid var(--teal);border-radius:10px;background:var(--surface)">
+          <h3 style="font-size:1.05rem;margin:0 0 .4rem">Ce que le kit apporte pour votre cas</h3>
+          <ul id="kitfor" style="margin:.2rem 0 .7rem;padding-left:1.2rem;font-size:.95rem"></ul>
+          <p id="kitprice" style="margin:0 0 .7rem;font-size:.92rem"><strong>29&nbsp;€ TTC, paiement unique.</strong> Satisfait ou remboursé pendant 14 jours, mises à jour gratuites jusqu'au 31/12/2027, reçu par e-mail.</p>
+          <a class="btn btn-primary" id="kitlink" href="#kit">Voir le kit · 29&nbsp;€</a> <a id="kitapercu" href="#apercu" style="display:inline-block;margin:.5rem 0 0 .4rem;font-size:.92rem">Voir un aperçu du contenu</a>
+        </div>
       </div>
     </div>
   </div>
@@ -183,16 +188,35 @@
                       : item("no", "Émission de factures électroniques", "Vous n'avez pas de client professionnel établi en France.");
       h += (has("b2c") || has("intl")) ? item(st, "E-reporting de vos données de transaction", "Pour vos ventes " + [has("b2c") ? "aux particuliers" : "", has("intl") ? "aux clients étrangers" : ""].filter(Boolean).join(" et ") + ", transmis par votre plateforme" + (vat === "franchise" ? " au rythme le plus espacé (franchise)." : "."))
                                        : item("no", "E-reporting de transaction", "Toutes vos ventes passent déjà par la facture électronique.");
-      var anyPriv = has("b2b") || has("b2c") || has("intl");
-      h += (nat !== "biens" && anyPriv) ? item(st, "Transmettre vos données d'encaissement", "Vous vendez des services\u00a0: la date et le montant de chaque paiement sont transmis (statut « encaissée » pour le B2B).")
-                                       : item("no", "Données de paiement", nat === "biens" ? "Elles ne concernent que les prestations de services." : "Aucune vente concernée.");
+      // 07/11/2026: a service to a business established abroad is taxable in the client's country: in principle no payment data (BOI-TVA-DECLA-20-30-60 § 1 and 30).
+      var anyPriv = has("b2b") || has("b2c");
+      h += (nat !== "biens" && anyPriv) ? item(st, "Transmettre vos données d'encaissement", "Vous vendez des services\u00a0: la date et le montant de chaque paiement sont transmis (statut « encaissée » pour le B2B)" + (has("intl") ? ", sauf en principe pour les prestations à des entreprises établies à l'étranger." : "."))
+                                       : item("no", "Données de paiement", nat === "biens" ? "Elles ne concernent que les prestations de services." : has("intl") ? "En principe aucune pour une prestation à une entreprise établie à l'étranger (imposable dans son pays)." : "Aucune vente concernée.");
     }
     if (has("pub")) h += item("no", "Factures au secteur public", "Rien de nouveau\u00a0: vous continuez sur Chorus Pro.");
     out.innerHTML = h;
+    // 07/11/2026 (conversion, diagnostic result): what the kit brings for THIS case, price and guarantee; no urgency, no counter.
+    var k = [];
+    if (big) {
+      k.push("Le kit est écrit pour les micro-entreprises, TPE et PME. Pour une ETI ou un grand groupe, il sera trop léger\u00a0: voyez plutôt avec votre expert-comptable ou votre direction fiscale.");
+    } else if (exo) {
+      k.push("Le cas pratique d'une infirmière libérale aux soins exonérés\u00a0: ce qui reste à faire (recevoir) et ce qui ferait entrer une facture dans le dispositif.");
+      k.push("La grille de 12 critères pour choisir une plateforme de réception adaptée à un petit volume de factures.");
+      k.push("Le message prêt à envoyer à vos fournisseurs pour leur indiquer où adresser vos factures.");
+    } else {
+      if (has("b2b") && vat === "franchise" && nat !== "biens") k.push("Le cas pratique d'une graphiste en franchise qui facture des agences\u00a0: ce qu'elle fait en septembre 2027, pas à pas.");
+      if (has("b2c")) k.push("Le cas pratique d'une céramiste qui vend sur les marchés et à des boutiques\u00a0: ce qui part en e-reporting, ce qui part en facture électronique.");
+      if (has("b2b")) k.push("Le fichier clients avec contrôle automatique des SIREN, et le message pour faire confirmer SIREN et adresses par vos clients.");
+      k.push("Le plan d'action daté à cocher, de maintenant au 1er\u00a0septembre 2027, et la grille de 12 critères pour choisir votre plateforme.");
+      k.push("Le message à votre expert-comptable pour savoir qui fait quoi" + (has("b2c") || has("intl") ? ", e-reporting compris." : "."));
+    }
+    document.getElementById("kitfor").innerHTML = k.slice(0, 4).map(function (x) { return "<li>" + x + "</li>"; }).join("");
+    document.getElementById("kitprice").hidden = big;
+    document.getElementById("kitlink").textContent = big ? "Voir le contenu du kit" : "Voir le kit · 29\u00a0€";
   }
   form.addEventListener("change", render); render();
 })();
 </script>
 </main><footer><div class="wrap"><span>Prêt pour 2027 · une publication BoboLabz</span>
 <span><a href="integrer-le-diagnostic.html">Intégrer le diagnostic sur votre site</a> · <a href="mentions-legales.html">Mentions légales et CGV</a></span>
-<span>Information générale, pas un conseil juridique. À jour au 06/11/2026.</span></div></footer></body></html>
+<span>Information générale, pas un conseil juridique. À jour au 07/11/2026.</span></div></footer></body></html>
