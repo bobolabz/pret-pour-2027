@@ -23,6 +23,7 @@ https://bobolabz.github.io/pret-pour-2027/articles/facture-agent-commercial.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-artiste-auteur.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-creation.html
 https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-report.html
+https://bobolabz.github.io/pret-pour-2027/articles/facture-electronique-vtc-taxi.html
 https://bobolabz.github.io/pret-pour-2027/articles/index.html
 https://bobolabz.github.io/pret-pour-2027/diagnostic.html
 https://bobolabz.github.io/pret-pour-2027/integrer-le-diagnostic.html
