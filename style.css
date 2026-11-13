@@ -185,3 +185,18 @@ footer .wrap { padding-block: 2rem; display: flex; justify-content: space-betwee
   .buy .price { font-size: 2.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+/* first screen on phones (13/11/2026): tighter hero: the diagnostic button shows without scrolling at 320 x 568, both buttons and the price line at 375 x 667 and up */
+@media (max-width: 760px) {
+  .hero .wrap { padding-block: 1.4rem 2rem; gap: 2rem; }
+  .countdown { margin-bottom: 1rem; }
+  .lead { font-size: 1.05rem; line-height: 1.55; }
+  .cta-row { margin-top: 1.1rem; gap: .6rem; }
+  .hero-offer { margin-top: .9rem; }
+}
+@media (max-width: 380px) {
+  h1 { font-size: 1.7rem; margin-bottom: .7rem; }
+  .top .wrap { padding-block: .55rem; }
+  .cta-row .btn { flex: 1 1 100%; text-align: center; }
+  .countdown { font-size: .75rem; column-gap: .4rem; padding: .4rem .55rem; }
+  .countdown b { font-size: 1.1rem; }
+}
