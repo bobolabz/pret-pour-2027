@@ -30,7 +30,8 @@
           <label><input type="radio" name="nat" id="nat-mixte" value="mixte"> Les deux</label>
         </div></fieldset>
       </form>
-      <div class="result" aria-live="polite">
+      <div class="result">
+        <p id="diagstatus" role="status" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"></p>
         <h2>Vos obligations</h2>
         <ul class="ob" id="obs"></ul>
         <p style="font-size:.88rem;color:var(--muted);margin-top:1rem">Information générale, pas un conseil juridique. Cas particuliers (marketplaces, activités mixtes) : voir le guide. Dates du calendrier légal : aucun report n'a été adopté à ce jour (7/11/2026) ; le Gouvernement a confirmé ce calendrier le 27/10/2026 (réponse à la question écrite n° 18851).</p>
@@ -111,7 +112,22 @@
     }).join("") + '<li><a href="' + base + 'articles/index.html"' + (emb ? ' target="_blank" rel="noopener"' : "") + ">Tous les guides</a></li>";
   }
   if (/[?&]embed=1/.test(location.search)) { var ap = document.getElementById("kitapercu"); ap.href = "https://bobolabz.github.io/pret-pour-2027/#apercu"; ap.target = "_blank"; ap.rel = "noopener"; }
-  form.addEventListener("change", render); render();
+  // 13/11/2026 (accessibility): the whole result block was an aria-live region, so screen readers re-read
+  // every obligation, the kit box and the guides at each click (and at each arrow key in a radio group).
+  // Now a short hidden status line sums up the result, announced once the answers settle.
+  var stat = document.getElementById("diagstatus"), tmr;
+  function announce() {
+    clearTimeout(tmr);
+    tmr = setTimeout(function () {
+      var n = function (c) { return out.querySelectorAll(".pill." + c).length; };
+      var d = n("done"), u = n("due"), z = n("no"), p = [];
+      if (d) p.push(d + (d > 1 ? " obligations déjà en vigueur" : " obligation déjà en vigueur"));
+      if (u) p.push(u + (u > 1 ? " obligations au 1er\u00a0septembre 2027" : " obligation au 1er\u00a0septembre 2027"));
+      if (z) p.push(z + (z > 1 ? " points qui ne vous concernent pas" : " point qui ne vous concerne pas"));
+      stat.textContent = "Résultat mis à jour\u00a0: " + p.join(", ") + ". Le détail suit, sous «\u00a0Vos obligations\u00a0».";
+    }, 500);
+  }
+  form.addEventListener("change", render); form.addEventListener("change", announce); render();
 })();
 </script>
 
@@ -128,4 +144,4 @@
 </script>
 <style>.embed .top, .embed .skip, .embed footer, .embed h1 + p { display: none; } .embed section.band { padding-block: .5rem; } .embed-credit { font-size: .85rem; color: var(--muted); margin-top: .8rem; }</style></main><footer><div class="wrap"><span>Prêt pour 2027 · une publication BoboLabz</span>
 <span><a href="integrer-le-diagnostic.html">Intégrer le diagnostic sur votre site</a> · <a href="mentions-legales.html">Mentions légales et CGV</a></span>
-<span>Information générale, pas un conseil juridique. À jour au 12/11/2026.</span></div></footer></body></html>
+<span>Information générale, pas un conseil juridique. À jour au 14/11/2026.</span></div></footer></body></html>
