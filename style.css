@@ -163,6 +163,10 @@ th { font-family: var(--display); }
 .endbox p { margin: .5rem 0; }
 .endbox-kit { border-top: 1px solid var(--line); margin-top: 1.3rem; padding-top: 1rem; font-size: .97rem; }
 .endbox-links { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; }
+/* diagnostic reminder after the first section of long articles (15/11/2026): compact, no price */
+.midbox { border-left: 4px solid var(--teal); background: var(--surface); border-radius: 0 8px 8px 0; padding: .9rem 1.1rem; max-width: 42rem; margin: 2rem 0 .5rem; font-size: .97rem; }
+.midbox p { margin: .3rem 0; }
+.midbox .btn { padding: .7rem 1.05rem; font-size: .95rem; margin-top: .3rem; }
 
 footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
 footer .wrap { padding-block: 2rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
